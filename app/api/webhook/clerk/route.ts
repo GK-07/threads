@@ -10,7 +10,6 @@ import { headers } from "next/headers";
 import { IncomingHttpHeaders } from "http";
 
 import { NextResponse } from "next/server";
-
 import {
   addMemberToCommunity,
   createCommunity,
@@ -70,7 +69,6 @@ export const POST = async (request: Request) => {
       evnt?.data ?? {};
 
     try {
-      console.log("CREATE COMMUNITY CALLED");
       // @ts-ignore
       await createCommunity(
         // @ts-ignore

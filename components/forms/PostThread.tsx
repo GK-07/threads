@@ -52,7 +52,6 @@ function PostThread({ userId }: { userId: string }) {
         path: pathname,
       });
       router.push("/");
-      console.log("Thread created");
     } catch (error: any) {
       throw new Error(`Error creating thread: ${error.message}}`);
     }

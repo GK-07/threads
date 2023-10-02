@@ -2,12 +2,25 @@ import { fetchUserPosts } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import ThreadCard from "../cards/ThreadCard";
 import { AnyParams } from "uploadthing/server";
+import { fetchCommunityPosts } from "@/lib/actions/community.actions";
+interface Props {
+  currentUserId: string;
+  accountId: string;
+  accountType: string;
+}
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
-  let result = await fetchUserPosts(accountId);
-  console.log("🚀 ~ file: ThreadsTab.tsx:8 ~ ThreadsTab ~ result:", result);
+  let result: any;
+
+  if (accountType === "User") {
+    result = await fetchUserPosts(accountId);
+  } else {
+    result = await fetchCommunityPosts(accountId);
+  }
 
   if (!result) redirect("/");
+  console.log("🚀 ~ file: ThreadsTab.tsx:22 ~ ThreadsTab ~ result:", result);
+
   return (
     <section className="mt-9 flex flex-col gap-10">
       {result.threads.map((thread: any) => (
